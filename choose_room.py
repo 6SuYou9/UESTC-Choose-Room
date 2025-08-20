@@ -335,7 +335,7 @@ def main():
                 break
             else:
                 print(f"登录失败，{args.t}s后重试...")
-                time.sleep(args.t)
+                time.sleep(int(args.t))
 
         print("\n=== 获取可用房间 ===\n")
         client.get_available_rooms()
