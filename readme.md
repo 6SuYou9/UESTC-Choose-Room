@@ -40,3 +40,6 @@ python .\choose_room.py --name1 xxx --name2 yyy
 * 注意：两者相同时，即只为一个学生选房，不同时，先为前者选房，再为后者选房
 * --json     学生信息json文件路径，默认 test.json
 * -t  登录失败后重试每次间隔时间，默认60s
+
+# 链接
+本项目地址：https://github.com/6SuYou9/UESTC-Choose-Room
