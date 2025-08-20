@@ -272,7 +272,7 @@ class DormitoryClient:
 
 # 全局学生信息字典，每个学生包含用户名、密码、目标楼栋号、房间号、期望舍友列
 # 从指定 json 文件中读取学生信息
-def load_students_info(json_path="test.json"):
+def load_students_info(json_path="config.json"):
     if not os.path.exists(json_path):
         print(f"未找到学生信息文件: {json_path}")
         return {}
