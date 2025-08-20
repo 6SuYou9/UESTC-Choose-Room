@@ -1,0 +1,16 @@
+{
+    "xxx": {
+        "username": "学号",
+        "password": "密码",
+        "building": "20栋",
+        "room": ["328","330"],
+        "preferred_roommates": ["舍友名(真名汉字)"]
+    },
+    "yyy": {
+        "username": "学号",
+        "password": "密码",
+        "building": "20栋",
+        "room": ["328","330"],
+        "preferred_roommates": ["舍友名(真名汉字)"]
+    }
+}
