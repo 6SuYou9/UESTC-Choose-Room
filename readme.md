@@ -29,7 +29,7 @@ pip install requests -i https://pypi.tuna.tsinghua.edu.cn/simple
 ```bash
 python .\choose_room.py --name1 xxx
 ```
-2. 使用：给xxx抢json中指定楼栋的宿舍后，给yyy抢，可以匹配舍友，即若json中两人互相填选对方姓名，即可选同一宿舍。若填的宿舍列表均不复合条件则不抢。
+2. 使用：给xxx抢json中指定楼栋的宿舍后，给yyy抢，可以匹配舍友，即若json中两人舍友互相填选对方姓名，即可选同一宿舍。若填的宿舍列表均不符合条件则不抢。
 ```bash
 python .\choose_room.py --name1 xxx --name2 yyy
 ```
