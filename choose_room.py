@@ -102,10 +102,24 @@ class DormitoryClient:
                     'page': 0,
                     'limit': 18
                 }
-                response = self.session.post(url, data=data)
-                # print("获取房间信息响应状态码:", response.status_code)
-                if response.status_code != 200:
-                    print(f"获取房间信息失败，状态码: {response.status_code}")
+                retry_count = 0
+                max_retries = 5
+                response = None
+                while retry_count < max_retries:
+                    try:
+                        response = self.session.post(url, data=data)
+                        # print("获取房间信息响应状态码:", response.status_code)
+                        if response.status_code == 200:
+                            break
+                        else:
+                            print(f"获取房间信息失败，状态码: {response.status_code}，正在重试第{retry_count+1}次...")
+                    except Exception as e:
+                        print(f"获取房间信息请求异常: {e}，正在重试第{retry_count+1}次...")
+                    retry_count += 1
+                    if retry_count < max_retries:
+                        time.sleep(1)
+                if response is None or response.status_code != 200:
+                    print(f"获取房间信息失败，状态码: {response.status_code if response else '无响应'}")
                     continue
 
                 res_json = response.json()
@@ -148,11 +162,18 @@ class DormitoryClient:
                 print(f"已匹配到房间：{matched_room.get('showFloor','')}{matched_room.get('room_num','')}（room_id: {matched_room.get('room_id')}）")
                 room_id = matched_room.get('room_id')
                 print(f"正在获取房间 {matched_room.get('showFloor','')}{matched_room.get('room_num','')} 的床位信息...")
-                bed_info = self.get_bed_list(room_id)
+                retry_count = 0
+                max_retries = 5
+                bed_info = None
+                while retry_count < max_retries:
+                    bed_info = self.get_bed_list(room_id)
+                    if bed_info and bed_info.get("flag"):
+                        break
+                    retry_count += 1
+                    print(f"获取床位信息失败，正在重试第{retry_count}次...")
                 if not bed_info or not bed_info.get("flag"):
                     print("获取床位信息失败，继续尝试下一个房间")
                     continue
-
                 beds = bed_info.get("data", [])
                 print("\n床位信息如下：")
                 selectable_beds = []
